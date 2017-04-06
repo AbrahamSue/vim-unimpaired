@@ -28,6 +28,15 @@ function! s:MapNextFamily(map,cmd)
     execute 'nmap <silent> [<C-'.a:map.'> '.map.'PFile'
     execute 'nmap <silent> ]<C-'.a:map.'> '.map.'NFile'
   endif
+  if exists(':'.a:cmd.'new')
+    execute 'nnoremap <silent> '.map.'New :<C-U>exe "'.cmd.'new'.end
+    execute 'nmap <silent> ='.      a:map .' '.map.'New'
+  endif
+  if exists(':'.a:cmd.'close')
+    execute 'nnoremap <silent> '.map.'Close :<C-U>exe "'.cmd.'close'.end
+    execute 'nmap <silent> ='.toupper(a:map).' '.map.'Close'
+  endif
+
 endfunction
 
 call s:MapNextFamily('a','')
