@@ -20,8 +20,8 @@ function! s:MapNextFamily(map,cmd)
   execute 'nnoremap <silent> '.map.'Last     :<C-U>exe "'.cmd.'last'.end
   execute 'nmap <silent> ['.        a:map .' '.map.'Previous'
   execute 'nmap <silent> ]'.        a:map .' '.map.'Next'
-  execute 'nmap <silent> ['.toupper(a:map).' '.map.'First'
-  execute 'nmap <silent> ]'.toupper(a:map).' '.map.'Last'
+  execute 'nmap <silent> [['.       a:map .' '.map.'First'
+  execute 'nmap <silent> ]]'.       a:map .' '.map.'Last'
   if exists(':'.a:cmd.'nfile')
     execute 'nnoremap <silent> '.map.'PFile :<C-U>exe "'.cmd.'pfile'.end
     execute 'nnoremap <silent> '.map.'NFile :<C-U>exe "'.cmd.'nfile'.end
@@ -34,7 +34,9 @@ call s:MapNextFamily('a','')
 call s:MapNextFamily('b','b')
 call s:MapNextFamily('l','l')
 call s:MapNextFamily('q','c')
-call s:MapNextFamily('t','t')
+call s:MapNextFamily('t','tab')
+call s:MapNextFamily('g','t')
+call s:MapNextFamily('s','sb')
 
 function! s:entries(path)
   let path = substitute(a:path,'[\\/]$','','')
