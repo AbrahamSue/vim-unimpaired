@@ -212,10 +212,10 @@ nnoremap <silent> <Plug>unimpairedMoveDown          :<C-U>call <SID>Move('+',v:c
 noremap  <silent> <Plug>unimpairedMoveSelectionUp   :<C-U>call <SID>MoveSelectionUp(v:count1)<CR>
 noremap  <silent> <Plug>unimpairedMoveSelectionDown :<C-U>call <SID>MoveSelectionDown(v:count1)<CR>
 
-nmap [e <Plug>unimpairedMoveUp
-nmap ]e <Plug>unimpairedMoveDown
-xmap [e <Plug>unimpairedMoveSelectionUp
-xmap ]e <Plug>unimpairedMoveSelectionDown
+nmap [m <Plug>unimpairedMoveUp
+nmap ]m <Plug>unimpairedMoveDown
+xmap [m <Plug>unimpairedMoveSelectionUp
+xmap ]m <Plug>unimpairedMoveSelectionDown
 
 " }}}1
 " Option toggling {{{1
