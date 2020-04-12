@@ -48,10 +48,10 @@ function! s:MapNextFamily(map,cmd) abort
   execute 'nnoremap <silent> '.map.'Next     :<C-U>exe "'.cmd.'next'.end
   execute 'nnoremap <silent> '.map.'First    :<C-U>exe "'.cmd.'first'.end
   execute 'nnoremap <silent> '.map.'Last     :<C-U>exe "'.cmd.'last'.end
-  call s:map('n', '['.        a:map , map.'Previous')
-  call s:map('n', ']'.        a:map , map.'Next')
-  call s:map('n', '['.toupper(a:map), map.'First')
-  call s:map('n', ']'.toupper(a:map), map.'Last')
+  call s:map('n', '['.        a:map, map.'Previous')
+  call s:map('n', ']'.        a:map, map.'Next')
+  call s:map('n', '[['.       a:map, map.'First')
+  call s:map('n', ']]'.       a:map, map.'Last')
   if exists(':'.a:cmd.'nfile')
     execute 'nnoremap <silent> '.map.'PFile :<C-U>exe "'.cmd.'pfile'.end
     execute 'nnoremap <silent> '.map.'NFile :<C-U>exe "'.cmd.'nfile'.end
@@ -63,13 +63,25 @@ function! s:MapNextFamily(map,cmd) abort
     call s:map('n', '[<C-'.toupper(a:map).'>', map.'PPrevious')
     call s:map('n', ']<C-'.toupper(a:map).'>', map.'PNext')
   endif
+
+  if exists(':'.a:cmd.'new')
+    execute 'nnoremap <silent> '.map.'New :<C-U>exe "'.cmd.'new'.end
+    execute 'nmap <silent> ='.      a:map .' '.map.'New'
+  endif
+  if exists(':'.a:cmd.'close')
+    execute 'nnoremap <silent> '.map.'Close :<C-U>exe "'.cmd.'close'.end
+    execute 'nmap <silent> ='.toupper(a:map).' '.map.'Close'
+  endif
+
 endfunction
 
 call s:MapNextFamily('a','')
 call s:MapNextFamily('b','b')
 call s:MapNextFamily('l','l')
 call s:MapNextFamily('q','c')
-call s:MapNextFamily('t','t')
+call s:MapNextFamily('t','tab')
+call s:MapNextFamily('g','t')
+call s:MapNextFamily('s','sb')
 
 function! s:entries(path) abort
   let path = substitute(a:path,'[\\/]$','','')
@@ -233,10 +245,10 @@ nnoremap <silent> <Plug>unimpairedMoveDown          :<C-U>call <SID>Move('+',v:c
 noremap  <silent> <Plug>unimpairedMoveSelectionUp   :<C-U>call <SID>MoveSelectionUp(v:count1)<CR>
 noremap  <silent> <Plug>unimpairedMoveSelectionDown :<C-U>call <SID>MoveSelectionDown(v:count1)<CR>
 
-call s:map('n', '[e', '<Plug>unimpairedMoveUp')
-call s:map('n', ']e', '<Plug>unimpairedMoveDown')
-call s:map('x', '[e', '<Plug>unimpairedMoveSelectionUp')
-call s:map('x', ']e', '<Plug>unimpairedMoveSelectionDown')
+call s:map('n', '[m', '<Plug>unimpairedMoveUp')
+call s:map('n', ']m', '<Plug>unimpairedMoveDown')
+call s:map('x', '[m', '<Plug>unimpairedMoveSelectionUp')
+call s:map('x', ']m', '<Plug>unimpairedMoveSelectionDown')
 
 " Section: Option toggling
 
